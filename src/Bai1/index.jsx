@@ -5,53 +5,53 @@ class GuessNumber extends Component {
   guessNumber = Math.round(Math.random() * 100);
   state = {
     temp: null,
-    guessHist: [],
+    guessArray: [],
   };
 
   getGuessNumber = () => {
-    let CloneGuessHist = [...this.state.guessHist];
-    let numGet = document.getElementById("doanSo").value;
-    CloneGuessHist.push(numGet);
+    let cloneArray = [...this.state.guessArray];
+    let number = document.getElementById("guessNumber").value;
+    cloneArray.push(number);
     this.setState({
-      temp: numGet,
-      guessHist: CloneGuessHist,
+      temp: number,
+      guessArray: cloneArray,
     });
   };
   Guess = () => {
     if (this.state.temp != null) {
       if (this.state.temp < this.guessNumber)
-        return <p>Số vừa đoán nhỏ hơn số cần tìm</p>;
+        return <p>Số nhập vào nhỏ hơn số cần tìm</p>;
       else if (this.state.temp > this.guessNumber)
-        return <p>Số vừa đoán lớn hơn số cần tìm</p>;
+        return <p>Số nhập vào lớn hơn số cần tìm</p>;
       else {
         return (
           <div>
             <p>Chúc mừng bạn đã đoán trúng số</p>
-            {this.renderGuessHistory()};
+            {this.renderTable()};
           </div>
         );
       }
     }
     return null;
   };
-  createRowHistory = () => {
-    const RowsUI = this.state.guessHist.map((item, i) => {
+  createTable = () => {
+    const RowsUI = this.state.guessArray.map((item, i) => {
       return (
         <tr>
           <td colSpan="100%">
-            Lần đoán thứ {i + 1} : {item}
+            Lần {i + 1} : {item}
           </td>
         </tr>
       );
     });
     return RowsUI;
   };
-  renderGuessHistory = () => {
-    if (this.state.guessHist.length > 0) {
+  renderTable = () => {
+    if (this.state.guessArray.length > 0) {
       return (
         <table>
           <th colSpan="100%">Lịch sử đoán</th>
-          {this.createRowHistory()}
+          {this.createTable()}
         </table>
       );
     }
@@ -59,9 +59,9 @@ class GuessNumber extends Component {
   render() {
     return (
       <div>
-        <div className="container bai1">
+        <div className="container guessContainer">
           <div className="form-group w-50 mt-3">
-            <input id="doanSo" placeholder="Nhập số đoán" type="number"></input>
+            <input id="guessNumber" placeholder="Nhập số" type="number"></input>
             <button
               onClick={this.getGuessNumber}
               className="btn btn-success ml-2"

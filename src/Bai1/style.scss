@@ -1,21 +1,21 @@
-.bai1 {
+.guessContainer {
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  #doanSo {
-    border: solid 2px red;
+  #guessNumber {
+    border: solid 2px #000000;
   }
   p {
     font-size: 30px;
-    color: #000;
     font-weight: 600;
     line-height: 16px;
   }
   table {
+    margin: 0 auto;
     th {
+      color: red;
       font-size: 25px;
-      color: firebrick;
     }
   }
 }
